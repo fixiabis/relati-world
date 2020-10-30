@@ -1,16 +1,9 @@
-import { RELATI_NORMAL_ROUTES, RELATI_ROUTES } from './definitions/routes';
-
-import {
-  RelatiStatus,
-  RelatiSymbol,
-  RELATI_DECEASED,
-  RELATI_N_SYMBOL,
-} from './definitions/types';
+import { RelatiRoute, RelatiStatus, RelatiSymbol } from './definitions';
 
 export class RelatiGrid {
   public index: number;
-  public symbol: RelatiSymbol = RELATI_N_SYMBOL;
-  public status: RelatiStatus = RELATI_DECEASED;
+  public symbol: RelatiSymbol = RelatiSymbol.None;
+  public status: RelatiStatus = RelatiStatus.Deceased;
   public nearbyGrids: RelatiGrid[] = [];
   public relatiRoutes: RelatiGrid[][] = [];
 
@@ -38,7 +31,7 @@ class RelatiBoard {
     }
 
     for (const grid of this.grids) {
-      for (const route of RELATI_ROUTES) {
+      for (const route of RelatiRoute.All) {
         const gridsOfRoute = route.map(([x, y]) => grid.getGridTo(x, y));
 
         if (gridsOfRoute[0] !== null) {
@@ -46,7 +39,7 @@ class RelatiBoard {
         }
       }
 
-      for (const [[x, y]] of RELATI_NORMAL_ROUTES) {
+      for (const [[x, y]] of RelatiRoute.Normal) {
         const nearbyGrid = grid.getGridTo(x, y);
 
         if (nearbyGrid !== null) {

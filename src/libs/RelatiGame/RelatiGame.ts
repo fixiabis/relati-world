@@ -1,6 +1,6 @@
 import { placePiece } from './actions';
-import { RelatiSymbol } from './definitions/types';
-import RelatiBoard from './RelatiBoard';
+import { RelatiSymbol } from './definitions';
+import RelatiBoard, { RelatiGrid } from './RelatiBoard';
 import { getGameState, getSymbol, reEnablePieces } from './rules';
 
 class RelatiGame {
@@ -8,6 +8,7 @@ class RelatiGame {
   public board: RelatiBoard;
   public isOver: boolean = false;
   public winner: number = 0;
+  public rootGrids: RelatiGrid[] = [];
   public isAllRootPlaced: boolean = false;
 
   constructor(boardWidth: number, boardHeight: number) {
@@ -29,9 +30,10 @@ class RelatiGame {
     }
 
     if (this.isAllRootPlaced) {
-      reEnablePieces(this.board);
+      reEnablePieces(this.board, this.rootGrids);
     } else {
       this.isAllRootPlaced = this.turn === 1;
+      this.rootGrids.push(grid);
     }
 
     this.turn++;

@@ -1,10 +1,5 @@
-import {
-  RelatiSymbol,
-  RELATI_LAUNCHER,
-  RELATI_REPEATER,
-} from './definitions/types';
-
 import { RelatiGrid } from './RelatiBoard';
+import { RelatiSymbol, RelatiStatus } from './definitions';
 import { isPlaceable, isRelatiable } from './rules';
 
 export const placePiece = (
@@ -20,12 +15,12 @@ export const placePiece = (
 
   if (isAllRootPlaced) {
     if (isRelatiable(grid, symbol)) {
-      grid.status = RELATI_REPEATER;
+      grid.status = RelatiStatus.Repeater;
     } else {
       return false;
     }
   } else {
-    grid.status = RELATI_LAUNCHER;
+    grid.status = RelatiStatus.Launcher;
   }
 
   return true;

@@ -1,23 +1,17 @@
-import {
-  RelatiSymbol,
-  RELATI_DECEASED,
-  RELATI_N_SYMBOL,
-  RELATI_RECEIVER,
-  RELATI_REPEATER,
-} from './definitions/types';
-
 import RelatiBoard, { RelatiGrid } from './RelatiBoard';
+import { RelatiSymbol, RelatiStatus } from './definitions';
 
 export const isPlaceable = (grid: RelatiGrid) =>
-  grid.symbol === RELATI_N_SYMBOL;
+  grid.symbol === RelatiSymbol.None;
 
 export const isPenetrable = (grid: RelatiGrid) =>
-  grid.status === RELATI_DECEASED;
+  grid.status === RelatiStatus.Deceased;
 
 export const isRelatiable = (grid: RelatiGrid, symbol: RelatiSymbol) => {
   for (const [sourceGrid, ...gridsInRoute] of grid.relatiRoutes) {
     const isSourceGridReliable =
-      sourceGrid.symbol === symbol && sourceGrid.status <= RELATI_REPEATER;
+      sourceGrid.symbol === symbol &&
+      sourceGrid.status <= RelatiStatus.Repeater;
 
     if (!isSourceGridReliable) {
       continue;
@@ -33,28 +27,39 @@ export const isRelatiable = (grid: RelatiGrid, symbol: RelatiSymbol) => {
   return false;
 };
 
-export const reEnablePieces = ({ grids }: RelatiBoard) => {
+export const reEnablePieces = (
+  { grids }: RelatiBoard,
+  sourceGrids: RelatiGrid[]
+) => {
   for (const grid of grids) {
-    if (grid.status === RELATI_REPEATER) {
-      grid.status = RELATI_RECEIVER;
+    if (grid.status === RelatiStatus.Repeater) {
+      grid.status = RelatiStatus.Receiver;
     }
   }
 
-  let isAllEnabled = false;
+  while (sourceGrids.length !== 0) {
+    const enabledGrids = [];
 
-  while (!isAllEnabled) {
-    isAllEnabled = true;
+    for (const sourceGrid of sourceGrids) {
+      for (const [targetGrid, ...gridsInRoute] of sourceGrid.relatiRoutes) {
+        const isTargetGridPending =
+          targetGrid.symbol === sourceGrid.symbol &&
+          targetGrid.status === RelatiStatus.Receiver;
 
-    for (const grid of grids) {
-      if (grid.status !== RELATI_RECEIVER || isPlaceable(grid)) {
-        continue;
-      }
+        if (!isTargetGridPending) {
+          continue;
+        }
 
-      if (isRelatiable(grid, grid.symbol)) {
-        grid.status = RELATI_REPEATER;
-        isAllEnabled = false;
+        const isRouteAvailable = gridsInRoute.every(isPenetrable);
+
+        if (isRouteAvailable) {
+          targetGrid.status = RelatiStatus.Repeater;
+          enabledGrids.push(targetGrid);
+        }
       }
     }
+
+    sourceGrids = enabledGrids;
   }
 };
 
@@ -65,7 +70,7 @@ export const getGameState = (
   turn: number
 ): [boolean, RelatiSymbol] => {
   if (turn < 2) {
-    return [false, RELATI_N_SYMBOL];
+    return [false, RelatiSymbol.None];
   }
 
   const symbol = getSymbol(turn);
@@ -76,7 +81,7 @@ export const getGameState = (
   );
 
   if (isSymbolPlaceable) {
-    return [false, RELATI_N_SYMBOL];
+    return [false, RelatiSymbol.None];
   }
 
   const opponentSymbol = getSymbol(turn + 1);
@@ -89,5 +94,5 @@ export const getGameState = (
     return [true, opponentSymbol];
   }
 
-  return [true, RELATI_N_SYMBOL];
+  return [true, RelatiSymbol.None];
 };
