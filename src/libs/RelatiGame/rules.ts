@@ -63,36 +63,38 @@ export const reEnablePieces = (
   }
 };
 
-export const getSymbol = (turn: number) => ((turn % 2) + 1) as RelatiSymbol;
+export const getSymbol = (turn: number, playersCount: number) =>
+  ((turn % playersCount) + 1) as RelatiSymbol;
 
 export const getGameState = (
   { grids }: RelatiBoard,
-  turn: number
-): [boolean, RelatiSymbol] => {
-  if (turn < 2) {
-    return [false, RelatiSymbol.None];
+  turn: number,
+  playersCount: number
+): [boolean, RelatiSymbol, number] => {
+  if (turn < playersCount) {
+    return [false, RelatiSymbol.None, turn];
   }
 
-  const symbol = getSymbol(turn);
-  const placeableGrids = grids.filter(isPlaceable);
+  for (
+    let turnPassedCount = 0;
+    turnPassedCount < playersCount;
+    turnPassedCount++
+  ) {
+    const symbol = getSymbol(turn + turnPassedCount, playersCount);
+    const placeableGrids = grids.filter(isPlaceable);
 
-  const isSymbolPlaceable = placeableGrids.some((grid) =>
-    isRelatiable(grid, symbol)
-  );
+    const isSymbolPlaceable = placeableGrids.some((grid) =>
+      isRelatiable(grid, symbol)
+    );
 
-  if (isSymbolPlaceable) {
-    return [false, RelatiSymbol.None];
+    if (isSymbolPlaceable) {
+      if (turnPassedCount !== playersCount - 1) {
+        return [false, RelatiSymbol.None, turn + turnPassedCount];
+      } else {
+        return [true, symbol, turn + turnPassedCount];
+      }
+    }
   }
 
-  const opponentSymbol = getSymbol(turn + 1);
-
-  const isOpponentSymbolPlaceable = placeableGrids.some((grid) =>
-    isRelatiable(grid, opponentSymbol)
-  );
-
-  if (isOpponentSymbolPlaceable) {
-    return [true, opponentSymbol];
-  }
-
-  return [true, RelatiSymbol.None];
+  return [true, RelatiSymbol.None, turn];
 };
