@@ -1,13 +1,13 @@
-export { default as Direction } from './Direction';
-export { default as RelatiRoute } from './RelatiRoute';
+export * as Direction from './Direction';
+export * as RelatiRoute from './RelatiRoute';
 
-export const enum RelatiSymbol {
+export enum RelatiSymbol {
   None,
-  O,
-  X,
+  Player1,
+  Player2,
 }
 
-export const enum RelatiStatus {
+export enum RelatiStatus {
   Launcher,
   Repeater,
   Receiver,
