@@ -1,13 +1,17 @@
 import { RelatiRoute, RelatiStatus, RelatiSymbol } from './definitions';
 
 export class RelatiGrid {
-  public index: number;
+  public readonly index: number;
+  public readonly nearbyGrids: RelatiGrid[] = [];
+  public readonly relatiRoutes: RelatiGrid[][] = [];
   public symbol: RelatiSymbol = RelatiSymbol.None;
   public status: RelatiStatus = RelatiStatus.Deceased;
-  public nearbyGrids: RelatiGrid[] = [];
-  public relatiRoutes: RelatiGrid[][] = [];
 
-  constructor(public x: number, public y: number, public board: RelatiBoard) {
+  constructor(
+    public readonly x: number,
+    public readonly y: number,
+    public readonly board: RelatiBoard
+  ) {
     this.index = y * board.width + x;
   }
 
@@ -22,7 +26,7 @@ export class RelatiGrid {
 class RelatiBoard {
   public grids: RelatiGrid[] = [];
 
-  constructor(public width: number, public height: number) {
+  constructor(public readonly width: number, public readonly height: number) {
     for (let x = 0; x < width; x++) {
       for (let y = 0; y < height; y++) {
         const grid = new RelatiGrid(x, y, this);
