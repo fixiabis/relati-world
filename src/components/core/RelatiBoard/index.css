@@ -1,0 +1,9 @@
+.relati-board {
+  display: grid;
+}
+
+.relati-board__grid {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
