@@ -1,50 +1,56 @@
-import React, { useEffect, useRef } from 'react';
-import { RelatiBoard as RelatiBoardValue } from '../../../libs/RelatiGame';
+import React from 'react';
+
+import {
+  RelatiBoard as RelatiBoardValue,
+  RelatiGrid as RelatiGridValue,
+} from '../../../libs/RelatiGame';
+
 import './index.css';
-import RelatiGrid, { RelatiGridProps } from './RelatiGrid';
+import { GridRenderrer, useRefForResize } from './utils';
 
 export interface RelatiBoardProps {
   value: RelatiBoardValue;
-  onGridClick?: RelatiGridProps['onClick'];
+  renderGrid: GridRenderrer;
+  children?: React.ReactNode;
+
+  onGridClick?: (
+    grid: RelatiGridValue,
+    event: React.MouseEvent<HTMLDivElement>
+  ) => void;
 }
 
 const RelatiBoard: React.FC<RelatiBoardProps> = ({
-  value: board,
+  value: boardValue,
+  children,
+  renderGrid,
   onGridClick: emitGridClick,
 }) => {
-  const boardRef = useRef() as React.RefObject<HTMLDivElement>;
+  const boardRef = useRefForResize(boardValue);
 
-  useEffect(() => {
-    if (!boardRef.current?.parentElement) {
-      return;
-    }
-
-    const boardElement = boardRef.current;
-
-    const resize = () => {
-      const {
-        offsetWidth,
-        offsetHeight,
-      } = boardElement.parentElement as HTMLElement;
-
-      const widthRatio = offsetWidth / board.width;
-      const heightRatio = offsetHeight / board.height;
-      const gridSize = Math.min(widthRatio, heightRatio) * 0.95;
-
-      boardElement.style.gridTemplateColumns = `repeat(${board.width}, ${gridSize}px)`;
-      boardElement.style.gridTemplateRows = `repeat(${board.height}, ${gridSize}px)`;
-    };
-
-    window.addEventListener('resize', resize);
-    window.dispatchEvent(new Event('resize'));
-
-    return () => window.removeEventListener('resize', resize);
-  }, [board, boardRef]);
+  const boardLayerStyle = {
+    gridArea: `1 / 1 / ${boardValue.width + 1} / ${boardValue.height + 1}`,
+  };
 
   return (
     <div ref={boardRef} className="relati-board">
-      {board.grids.map((grid, i) => (
-        <RelatiGrid key={i} value={grid} onClick={emitGridClick} />
+      {React.Children.map(children, (child, key) => (
+        <div
+          key={key}
+          className="relati-board__layer"
+          style={boardLayerStyle}
+          children={child}
+        />
+      ))}
+
+      {boardValue.grids.map((gridValue, key) => (
+        <div
+          key={key}
+          className="relati-board__grid"
+          children={renderGrid(gridValue)}
+          onClick={
+            emitGridClick && ((event) => emitGridClick(gridValue, event))
+          }
+        />
       ))}
     </div>
   );

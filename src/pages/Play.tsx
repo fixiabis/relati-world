@@ -3,14 +3,6 @@ import { RelatiBoard } from '../components';
 import { RelatiGame } from '../libs';
 import { RelatiGrid } from '../libs/RelatiGame';
 
-const boardContainerStyle = {
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-};
-
 const Play = () => {
   const game = useMemo(() => new RelatiGame(9, 9), []);
   const [, setGameTurn] = useState(0);
@@ -21,9 +13,21 @@ const Play = () => {
   };
 
   return (
-    <div style={boardContainerStyle}>
-      <RelatiBoard value={game.board} onGridClick={handleGridClick} />
-    </div>
+    <>
+      <header></header>
+      <main>
+        <RelatiBoard
+          value={game.board}
+          onGridClick={handleGridClick}
+          renderGrid={(grid) => (
+            <>
+              {grid.symbol}, {grid.status}
+            </>
+          )}
+        />
+      </main>
+      <nav></nav>
+    </>
   );
 };
 
