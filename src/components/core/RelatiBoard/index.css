@@ -2,8 +2,14 @@
   display: grid;
 }
 
-.relati-board__grid {
+.relati-board__grid,
+.relati-board__layer {
   -moz-user-select: none;
   -webkit-user-select: none;
+}
+
+.relati-board__grid {
   cursor: pointer;
+  position: relative;
+  overflow: visible;
 }
