@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { PageType } from '../utilities/client-side';
+import { convertPage, PageType } from '../utilities/client-side';
 import { useSelector } from 'react-redux';
 import { useHistory as useRouter } from 'react-router-dom';
 import Game, {
@@ -53,7 +53,7 @@ const Strategies: PageType<Props> = ({ size = 'x5', level = '1' }) => {
   const effectSetting = useSelector<State, SettingState['effect']>(
     (state) => state.setting.effect
   );
-  const leavePage = () => router.replace('/choose-mode?for=puzzle');
+  const leavePage = () => router.replace('/legacy/choose-mode?for=puzzle');
   const finishPuzzle = () => setIsPuzzleFinish(true);
   const openPuzzleLeaveMessageBox = () => setIsPuzzleLeaveMessageBoxOpen(true);
   const closePuzzleFinishMessageBox = () => setIsPuzzleFinishBoxOpen(false);
@@ -112,4 +112,4 @@ Strategies.getInitialProps = async ({ query: { level, on: size } }) => {
   };
 };
 
-export default Strategies;
+export default convertPage(Strategies);

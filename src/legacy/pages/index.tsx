@@ -27,11 +27,11 @@ const Main = () => {
   const bottomButtonGroupClassName = `to-bottom${
     buttonGroupClassName && ` ${buttonGroupClassName}`
   }`;
-  const toChooseGameModePage = () => router.replace('/choose-mode?for=game');
+  const toChooseGameModePage = () => router.replace('/legacy/choose-mode?for=game');
   const toChooseTutorialModePage = () =>
-    router.replace('/choose-mode?for=tutorial');
+    router.replace('/legacy/choose-mode?for=tutorial');
   const toChoosePuzzleModePage = () =>
-    router.replace('/choose-mode?for=puzzle');
+    router.replace('/legacy/choose-mode?for=puzzle');
   const openSetting = () => setIsSettingOpen(true);
   const closeSetting = () => setIsSettingOpen(false);
   const resetSetting = () => dispatch(resetAllSetting());

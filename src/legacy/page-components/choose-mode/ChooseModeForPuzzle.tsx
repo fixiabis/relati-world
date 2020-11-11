@@ -6,9 +6,9 @@ const ChooseModeForPuzzle: ChooseModePageComponent = ({
   router,
   leavePage,
 }) => {
-  const toHowToPlayPageOnX5 = () => router.replace('/strategies?on=x5');
-  const toHowToPlayPageOnX7 = () => router.replace('/strategies?on=x7');
-  const toHowToPlayPageOnX9 = () => router.replace('/strategies?on=x9');
+  const toHowToPlayPageOnX5 = () => router.replace('/legacy/strategies?on=x5');
+  const toHowToPlayPageOnX7 = () => router.replace('/legacy/strategies?on=x7');
+  const toHowToPlayPageOnX9 = () => router.replace('/legacy/strategies?on=x9');
 
   return (
     <Page id="choose-mode" title="choose puzzle mode">

@@ -6,9 +6,9 @@ const ChooseModeForTutorial: ChooseModePageComponent = ({
   router,
   leavePage,
 }) => {
-  const toHowToPlayPageOnX5 = () => router.replace('/how-to-play?on=x5');
-  const toHowToPlayPageOnX7 = () => router.replace('/how-to-play?on=x7');
-  const toHowToPlayPageOnX9 = () => router.replace('/how-to-play?on=x9');
+  const toHowToPlayPageOnX5 = () => router.replace('/legacy/how-to-play?on=x5');
+  const toHowToPlayPageOnX7 = () => router.replace('/legacy/how-to-play?on=x7');
+  const toHowToPlayPageOnX9 = () => router.replace('/legacy/how-to-play?on=x9');
 
   return (
     <Page id="choose-mode" title="choose tutorial mode">

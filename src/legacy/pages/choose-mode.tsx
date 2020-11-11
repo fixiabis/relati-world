@@ -19,7 +19,7 @@ export interface Props {
   redirect?: string;
 }
 
-const ChooseMode: PageType<Props> = ({ type = 'game', redirect = '/' }) => {
+const ChooseMode: PageType<Props> = ({ type = 'game', redirect = '/legacy' }) => {
   const router = useRouter();
   const leavePage = () => router.replace(redirect);
   const ChooseModePage = ChooseModePageFromType[type] || ChooseModeForGame;

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { PageType } from '../utilities/client-side';
+import { convertPage, PageType } from '../utilities/client-side';
 import { useHistory as useRouter } from 'react-router-dom';
 import {
   RelatiGame,
@@ -74,7 +74,7 @@ const Play: PageType<Props> = ({
   const effectSetting = useSelector<State, SettingState['effect']>(
     (state) => state.setting.effect
   );
-  const leavePage = () => router.replace('/choose-mode?for=game');
+  const leavePage = () => router.replace('/legacy/choose-mode?for=game');
   const openGameLeaveMessageBox = () => setIsGameLeaveMessageBoxOpen(true);
   const closeGameOverMessageBox = () => setIsGameOverMessageBoxOpen(false);
   const closeGameLeaveMessageBox = () => setIsGameLeaveMessageBoxOpen(false);
@@ -188,4 +188,4 @@ Play.getInitialProps = async ({
   };
 };
 
-export default Play;
+export default convertPage(Play);
