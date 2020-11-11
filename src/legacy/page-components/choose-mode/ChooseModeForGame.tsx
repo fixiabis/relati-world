@@ -11,10 +11,10 @@ const ChooseModeForGame: ChooseModePageComponent = ({ router, leavePage }) => {
   const toPlayPage1pWithPlayerO = () => toPlayPageWithPlayer('o');
   const toPlayPage1pWithPlayerX = () => toPlayPageWithPlayer('x');
   const toPlayPageWithPlayer = (player: string) =>
-    router.replace(`/play?1p&on=${size}&with=${player}`);
+    router.replace(`/legacy/play?1p&on=${size}&with=${player}`);
   const toPlayPage2p = () =>
     router.replace(
-      `${!navigator.onLine ? `/play?2p&` : `/wait-for-opponent?`}on=${size}`
+      `${!navigator.onLine ? `/legacy/play?2p&` : `/legacy/wait-for-opponent?`}on=${size}`
     );
 
   if (!size) {
