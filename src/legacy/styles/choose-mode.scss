@@ -1,0 +1,32 @@
+#choose-mode {
+    .choose-mode-control {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: calc(100% - 70px);
+
+        .main-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .button-group {
+            width: 250px;
+            max-width: 250px;
+            height: 70px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            .button.with-text {
+                padding-left: 50px;
+                width: 150px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+@import "../../styles/utilities";
+
+.draw-line {
+    opacity: 0.3;
+    animation-name: draw-line;
+    animation-duration: 0.1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@for $line-length from 1 to 9 {
+    $slash-line-length: $line-length * 1.41421;
+    $slash-line-length-escaped-query: str-replace($slash-line-length, ".", "\\.");
+
+    .draw-line.draw-line-length-#{$line-length} {
+        stroke-dasharray: #{5 * $line-length};
+        stroke-dashoffset: #{5 * $line-length};
+    }
+
+    .draw-line.draw-line-length-#{$slash-line-length-escaped-query} {
+        stroke-dasharray: #{5 * $slash-line-length};
+        stroke-dashoffset: #{5 * $slash-line-length};
+    }
+}
+
+// IE not support draw-line effect
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .draw-line,
+    .draw-line-slowly {
+        stroke-dasharray: 0 !important;
+        stroke-dashoffset: 0 !important;
+    }
+}
+
+@keyframes draw-line {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

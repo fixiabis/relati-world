@@ -36,7 +36,7 @@ const RelatiBoard: React.FC<RelatiBoardProps> = ({
       {React.Children.map(children, (child, key) => (
         <div
           key={key}
-          className="relati-board__layer"
+          className="relati-board.layer"
           style={boardLayerStyle}
           children={child}
         />
@@ -45,7 +45,7 @@ const RelatiBoard: React.FC<RelatiBoardProps> = ({
       {boardValue.grids.map((gridValue, key) => (
         <div
           key={key}
-          className="relati-board__grid"
+          className="relati-board.grid"
           children={renderGrid(gridValue)}
           onClick={
             emitGridClick && ((event) => emitGridClick(gridValue, event))

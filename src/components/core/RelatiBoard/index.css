@@ -2,13 +2,13 @@
   display: grid;
 }
 
-.relati-board__grid,
-.relati-board__layer {
+.relati-board\.grid,
+.relati-board\.layer {
   -moz-user-select: none;
   -webkit-user-select: none;
 }
 
-.relati-board__grid {
+.relati-board\.grid {
   cursor: pointer;
   position: relative;
   overflow: visible;

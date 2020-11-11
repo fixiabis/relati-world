@@ -1,0 +1,13 @@
+.piece-emphasis {
+    animation: piece-emphasis 1s infinite linear;
+}
+
+@keyframes piece-emphasis {
+    0%, 100% {
+        transform: translate(0.5px, 0.5px) scale(0.8);
+    }
+
+    50% {
+        transform: translate(-0.5px, -0.5px) scale(1.2);
+    }
+}

@@ -1,0 +1,16 @@
+@import "../../styles/effects";
+
+.box-container {
+    .message-box {
+        user-select: none;
+        width: 300px;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .message-box {
+        position: fixed;
+        top: calc(50% - 100px);
+        left: calc(50% - 150px);
+    }
+}

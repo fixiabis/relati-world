@@ -1,0 +1,13 @@
+.tutorial-dialog {
+  position: absolute;
+}
+
+.tutorial-dialog\.description {
+  height: 100%;
+}
+
+.tutorial-dialog\.description-text {
+  height: 30px;
+  max-width: 80%;
+  border-radius: 15px;
+}

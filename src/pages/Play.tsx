@@ -26,7 +26,7 @@ const Play = () => {
           )}
         />
       </main>
-      <nav></nav>
+      <footer></footer>
     </>
   );
 };
