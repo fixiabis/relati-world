@@ -41,7 +41,7 @@ const RelatiGameBy1Player: PlayGameComponent = ({
 
     const pieceCodes = convertBoardToPieceCodes(game.board);
     const nowPlayer = game.getNowPlayer();
-    const apiUrlWithQuery = `/api/next-step?turn=${game.turn}&pieces=${pieceCodes}&level=${level}`;
+    const apiUrlWithQuery = `https://relati.now.sh/api/next-step?turn=${game.turn}&pieces=${pieceCodes}&level=${level}`;
 
     await Axios.get(apiUrlWithQuery)
       .then(async ({ data: gridIndex }) => {
