@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { RelatiBoard } from '../components';
-import { RelatiGame } from '../libs';
-import { RelatiGrid } from '../libs/RelatiGame';
+import { RelatiBoard, Avatar, Button } from '../components';
+import RelatiGame, { RelatiGrid } from '../libs/RelatiGame';
 
 const Play = () => {
   const game = useMemo(() => new RelatiGame(9, 9), []);
@@ -14,7 +13,11 @@ const Play = () => {
 
   return (
     <>
-      <header></header>
+      <header className="flex flex:justify-space-between">
+        <Avatar border="crimson" />
+        <div></div>
+        <Avatar border="royalblue" />
+      </header>
       <main>
         <RelatiBoard
           value={game.board}
@@ -26,7 +29,7 @@ const Play = () => {
           )}
         />
       </main>
-      <footer></footer>
+      <Button float />
     </>
   );
 };
