@@ -2,8 +2,11 @@
   user-select: none;
   color: #fff;
   background-color: #888;
-  width: 40px;
-  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
   border-radius: 5px;
   padding: 5px;
   cursor: pointer;
@@ -16,6 +19,16 @@
 .btn:active {
   transition: all 0.5s;
   transform: scale(0.8);
+}
+
+.btn\:small {
+  width: 40px;
+  height: 40px;
+}
+
+.btn\:large {
+  width: 80px;
+  height: 80px;
 }
 
 .btn\:float {
