@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { RelatiBoard, Avatar, Button } from '../components';
 import RelatiGame, { RelatiGrid } from '../libs/RelatiGame';
 import {LottieView,LottieSkin,chessmanSkin} from '../components/animations'
@@ -28,8 +29,10 @@ const pieces = {
 };
 
 const Play = () => {
+  const history = useHistory();
   const game = useMemo(() => new RelatiGame(9, 9), []);
-  const [, setGameTurn] = useState(0);
+  const [isGamePaused, setIsGamePaused] = useState(false);
+  const [gameTurn, setGameTurn] = useState(0);
 
   const handleGridClick = ({ x, y }: RelatiGrid) => {
     game.placePiece(x, y);
@@ -52,7 +55,22 @@ console.log('fuck',chessmanSkin.chessmanSkin[0])
           )}
         />
       </main>
-      <Button float />
+      {isGamePaused && (
+        <div
+          className="overlay flex"
+          style={{ background: 'rgba(0, 0, 0, 0.3)' }}
+        >
+          <Button onClick={() => history.push('/')}>離開</Button>
+        </div>
+      )}
+      <Button
+        small
+        float
+        style={{ fontSize: 12 }}
+        onClick={() => setIsGamePaused(!isGamePaused)}
+      >
+        {isGamePaused ? '關閉' : '暫停'}
+      </Button>
     </>
   );
 };

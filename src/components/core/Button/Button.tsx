@@ -6,18 +6,30 @@ export interface ButtonProps
     React.HTMLAttributes<HTMLDivElement>,
     HTMLDivElement
   > {
+  small?: boolean;
+  large?: boolean;
   float?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
   className = '',
-  float = false,
+  small: isSmall = false,
+  large: isLarge = false,
+  float: isFloat = false,
   ...props
 }) => {
   className = `btn${className && ` ${className}`}`;
 
-  if (float) {
+  if (isFloat) {
     className += ' btn:float';
+  }
+
+  if (isSmall) {
+    className += ' btn:small';
+  }
+
+  if (isLarge) {
+    className += ' btn:large';
   }
 
   return <div {...props} className={className} />;
