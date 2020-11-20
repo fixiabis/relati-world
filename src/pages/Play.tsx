@@ -7,25 +7,25 @@ import { RelatiStatus, RelatiSymbol } from '../libs/RelatiGame/definitions'
 
 const pieces = {
   /** 空 */
-  [RelatiSymbol.None + '' + RelatiStatus.Deceased]: <LottieSkin id='0'/>,
+  [RelatiSymbol.None + '' + RelatiStatus.Deceased]: <LottieSkin id='0' loop={true}/>,
 
   /** 玩家1的起源符號 */
-  [RelatiSymbol.Player1 + '' + RelatiStatus.Launcher]: <LottieSkin id='1'/>,
+  [RelatiSymbol.Player1 + '' + RelatiStatus.Launcher]: <LottieSkin id='1' loop={false}/>,
 
   /** 玩家1的可用符號 */
-  [RelatiSymbol.Player1 + '' + RelatiStatus.Repeater]: <LottieSkin id='2'/>,
+  [RelatiSymbol.Player1 + '' + RelatiStatus.Repeater]: <LottieSkin id='2' loop={false}/>,
 
   /** 玩家1的失效符號 */
-  [RelatiSymbol.Player1 + '' + RelatiStatus.Receiver]: <LottieSkin id='3'/>,
+  [RelatiSymbol.Player1 + '' + RelatiStatus.Receiver]: <LottieSkin id='3' loop={true} />,
 
   /** 玩家2的起源符號 */
-  [RelatiSymbol.Player2 + '' + RelatiStatus.Launcher]: <LottieSkin id='4'/>,
+  [RelatiSymbol.Player2 + '' + RelatiStatus.Launcher]: <LottieSkin id='4' loop={false}/>,
 
   /** 玩家2的可用符號 */
-  [RelatiSymbol.Player2 + '' + RelatiStatus.Repeater]: <LottieSkin id='5'/>,
+  [RelatiSymbol.Player2 + '' + RelatiStatus.Repeater]: <LottieSkin id='5' loop={false}/>,
 
   /** 玩家2的失效符號 */
-  [RelatiSymbol.Player2 + '' + RelatiStatus.Receiver]: <LottieSkin id='6'/>,
+  [RelatiSymbol.Player2 + '' + RelatiStatus.Receiver]: <LottieSkin id='6'loop={true} />,
 };
 
 const Play = () => {
