@@ -1,8 +1,13 @@
 import React from 'react';
-import {LottieView} from '../components/animations'
+import { LottieView, SVGView, SvgComponent } from '../components/animations'
 const Main = () => {
   return <>Main
-  <LottieView/>
+    <div>
+    <LottieView />
+      <SvgComponent>
+      
+      </SvgComponent>
+    </div>
   </>;
 };
 
