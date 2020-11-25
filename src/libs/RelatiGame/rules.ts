@@ -33,6 +33,7 @@ export const reEnablePieces = (
 ) => {
   for (const grid of grids) {
     if (grid.status === RelatiStatus.Repeater) {
+      grid.prevStatus = grid.status;
       grid.status = RelatiStatus.Receiver;
     }
   }

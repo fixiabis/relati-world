@@ -6,6 +6,8 @@ export class RelatiGrid {
   public readonly relatiRoutes: RelatiGrid[][] = [];
   public symbol: RelatiSymbol = RelatiSymbol.None;
   public status: RelatiStatus = RelatiStatus.Deceased;
+  public prevSymbol: RelatiSymbol = RelatiSymbol.None;
+  public prevStatus: RelatiStatus = RelatiStatus.Deceased;
 
   constructor(
     public readonly x: number,

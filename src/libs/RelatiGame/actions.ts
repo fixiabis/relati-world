@@ -13,14 +13,15 @@ export const placePiece = (
 
   if (isAllRootPlaced) {
     if (isRelatiable(grid, symbol)) {
-      grid.status = RelatiStatus.Repeater;
+      grid.prevStatus = grid.status = RelatiStatus.Repeater;
     } else {
       return false;
     }
   } else {
-    grid.status = RelatiStatus.Launcher;
+    grid.prevStatus = grid.status = RelatiStatus.Launcher;
   }
 
+  grid.prevSymbol = grid.symbol;
   grid.symbol = symbol;
   return true;
 };
